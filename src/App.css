@@ -17,9 +17,11 @@
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
-
 .logo.apollo-client:hover {
   filter: drop-shadow(0 0 2em #030303aa);
+}
+.logo.graphql:hover {
+  filter: drop-shadow(0 0 2em #ff0091aa);
 }
 
 @keyframes logo-spin {
