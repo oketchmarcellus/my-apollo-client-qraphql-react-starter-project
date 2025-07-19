@@ -48,7 +48,7 @@ function App() {
       <h1>Vite + React + Apollo Client + GraphQL</h1>
       <div className="card">
         <div key={name}>
-          <h2>Let's Know Our Countries 🚀</h2>
+          <h2>Let's Know Our Countries 🌐🇰🇪</h2>
           <h2>Country: {name}</h2>
           <table style={{ borderCollapse: 'collapse', width: '100%' }}>
             <tbody>
