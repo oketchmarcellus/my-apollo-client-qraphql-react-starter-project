@@ -49,21 +49,28 @@ function App() {
       <div className="card">
         <div key={name}>
           <h2>Let's Know Our Countries 🚀</h2>
-          <h3>Country: {name}</h3>
-          <br />
-          <b>About this location:</b>
-          <ul>
-            <li>Capital is known as {capital}</li>
-            <li>Its symbol is {emoji}</li>
-            <li>Its native is {native}</li>
-            <li>Currency: {currency}</li> 
-            {languages?.map((lang) => (
-              <ul key={lang.code}>
-                <li>Language: {lang.name}</li>
-                <li>Code: {lang.code}</li>
-              </ul>
-            ))}
-          </ul>
+          <h2>Country: {name}</h2>
+          <table style={{ borderCollapse: 'collapse', width: '100%' }}>
+            <tbody>
+              <tr>
+                <th style={{ border: '1px solid #ddd', padding: '8px' }}>About this location:</th>
+                <td style={{ border: '1px solid #ddd', padding: '8px' }} colSpan="2">
+                  <ul style={{ listStyleType: 'none', padding: 0 }}>
+                    <li><strong>Capital:</strong> {capital}</li>
+                    <li><strong>Symbol:</strong> {emoji}</li>
+                    <li><strong>Native:</strong> {native}</li>
+                    <li><strong>Currency:</strong> {currency}</li>
+                    {languages?.map((lang) => (
+                      <li key={lang.code}>
+                        <strong>Language:</strong> {lang.name} <br />
+                        <strong>Code:</strong> {lang.code}
+                      </li>
+                    ))}
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
