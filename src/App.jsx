@@ -1,0 +1,79 @@
+import { useState } from 'react'
+import { useQuery, gql } from '@apollo/client';
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import apolloClientLogo from './assets/apollo-client.svg'
+import graphqlLogo from './assets/graphql.svg'
+import './App.css'
+
+const GET_DATA = gql`
+  query GetLocations {
+      country(code: "KE") {
+        name
+        native
+        capital
+        emoji
+        currency
+        languages {
+          code
+          name
+        }
+      }
+    }
+`;
+
+function App() {
+  const { loading, error, data } = useQuery(GET_DATA);
+  const {name, currency, capital, native, emoji, languages} = data?.country || {};
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  return (
+    <>
+      <div>
+        <a href="https://vite.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://react.dev" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+        <a href="https://www.apollographql.com/" target="_blank">
+          <img src={apolloClientLogo} className="logo apollo-client" alt="Apollo Client logo" />
+        </a>
+        <a href="https://graphql.org/" target="_blank">
+          <img src={graphqlLogo} className="logo graphql" alt="GraphQL logo" />
+        </a>
+      </div>
+      <h1>Vite + React + Apollo Client + GraphQL</h1>
+      <div className="card">
+        <div key={name}>
+          <h2>Let's Know Our Countries 🚀</h2>
+          <h3>Country: {name}</h3>
+          <br />
+          <b>About this location:</b>
+          <ul>
+            <li>Capital is known as {capital}</li>
+            <li>Its symbol is {emoji}</li>
+            <li>Its native is {native}</li>
+            <li>Currency: {currency}</li> 
+            {languages?.map((lang) => (
+              <ul key={lang.code}>
+                <li>Language: {lang.name}</li>
+                <li>Code: {lang.code}</li>
+              </ul>
+            ))}
+          </ul>
+        </div>
+        <p>
+          Edit <code>src/App.jsx</code> and save to test HMR
+        </p>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite, React , Apollo Client and QraphQL logos to learn more
+      </p>
+    </>
+  )
+}
+
+export default App
