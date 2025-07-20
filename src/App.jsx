@@ -7,8 +7,8 @@ import graphqlLogo from './assets/graphql.svg'
 import './App.css'
 
 const GET_DATA = gql`
-  query GetLocations {
-      country(code: "KE") {
+  query GetLocations($code: ID!) {
+      country(code: $code) {
         name
         native
         capital
@@ -23,8 +23,26 @@ const GET_DATA = gql`
 `;
 
 function App() {
-  const { loading, error, data } = useQuery(GET_DATA);
-  const {name, currency, capital, native, emoji, languages} = data?.country || {};
+  const [countryCode, setCountryCode] = useState(''); // Initialize with an empty string
+  const [submittedCode, setSubmittedCode] = useState('KE'); // Default submitted code to KE
+
+  // Use the submittedCode in the query
+  const { loading, error, data } = useQuery(GET_DATA, {
+    variables: { code: submittedCode }, // Pass the submittedCode variable
+  });
+
+  const { name, currency, capital, native, emoji, languages } = data?.country || {};
+
+  const handleInputChange = (event) => {
+    setCountryCode(event.target.value.toUpperCase()); // Convert to uppercase for consistency
+  };
+  const displayedCountryCode = countryCode || 'KE'; // Default to 'KE' if input is empty
+
+  const handleSubmit = (event) => {
+    event.preventDefault(); // Prevent default form submission
+    setSubmittedCode(countryCode || 'KE'); // Update submitted code
+  };
+
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
@@ -47,8 +65,18 @@ function App() {
       </div>
       <h1>Vite + React + Apollo Client + GraphQL</h1>
       <div className="card">
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            value={countryCode}
+            onChange={handleInputChange}
+            placeholder="Enter country code (e.g., KE)"
+            style={{ marginBottom: '20px', padding: '10px', width: '100%' }}
+          />
+          <button type="submit">Submit</button>
+        </form>
         <div key={name}>
-          <h2>Let's Know Our Countries 🌐🇰🇪</h2>
+          <h2>Let's Know Our Countries 🌐 {displayedCountryCode}</h2>
           <h2>Country: {name}</h2>
           <table style={{ borderCollapse: 'collapse', width: '100%' }}>
             <tbody>
