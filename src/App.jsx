@@ -72,6 +72,7 @@ function App() {
             </tbody>
           </table>
         </div>
+        <br />
         <p>You can fork this project from <a href="https://github.com/oketchmarcellus/my-apollo-client-qraphql-react-starter-project">here</a></p>
       </div>
       <p className="read-the-docs">
