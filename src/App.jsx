@@ -76,6 +76,7 @@ function App() {
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
       </div>
+      <p>You can fork this project from <a href="https://github.com/oketchmarcellus/my-apollo-client-qraphql-react-starter-project">here</a></p>
       <p className="read-the-docs">
         Click on the Vite, React , Apollo Client and QraphQL logos to learn more
       </p>
