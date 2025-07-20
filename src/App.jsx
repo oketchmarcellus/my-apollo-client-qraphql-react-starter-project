@@ -65,7 +65,9 @@ function App() {
       </div>
       <h1>Vite + React + Apollo Client + GraphQL</h1>
       <div className="card">
-        <form onSubmit={handleSubmit}>
+        <div key={name}>
+          <h2>Let's Know Our Countries 🌐 {displayedCountryCode}</h2>
+          <form onSubmit={handleSubmit}>
           <input
             type="text"
             value={countryCode}
@@ -75,8 +77,6 @@ function App() {
           />
           <button type="submit">Submit</button>
         </form>
-        <div key={name}>
-          <h2>Let's Know Our Countries 🌐 {displayedCountryCode}</h2>
           <h2>Country: {name}</h2>
           <table style={{ borderCollapse: 'collapse', width: '100%' }}>
             <tbody>
